@@ -10,15 +10,22 @@
     * { box-sizing: border-box; }
     body { margin: 0; }
     header { background: #ffe600; padding: 24px clamp(16px, 5vw, 56px); border-bottom: 4px solid #172b4d; }
-    header h1 { max-width: 1120px; margin: 0 auto; font-size: clamp(1.35rem, 3vw, 2rem); }
-    main { max-width: 1120px; margin: 28px auto; padding: 0 16px; }
+    header h1 { max-width: 1568px; margin: 0 auto; font-size: clamp(1.35rem, 3vw, 2rem); }
+    main { max-width: 1600px; margin: 28px auto; padding: 0 16px; }
     .toolbar { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 14px; flex-wrap: wrap; }
     .toolbar p { margin: 0; color: #52627a; }
     input { width: min(100%, 360px); padding: 12px 14px; border: 1px solid #cbd3df; border-radius: 8px; font: inherit; background: white; }
     .table-wrap { overflow-x: auto; background: white; border: 1px solid #dce2ea; border-radius: 10px; box-shadow: 0 4px 16px #172b4d0a; }
-    table { width: 100%; border-collapse: collapse; min-width: 1100px; }
-    th, td { text-align: left; padding: 14px 16px; border-bottom: 1px solid #e8edf3; vertical-align: top; }
-    th { background: #f0f3f8; color: #344563; font-size: .9rem; }
+    table { width: 100%; border-collapse: collapse; min-width: 1280px; table-layout: fixed; }
+    th, td { text-align: left; padding: 10px 12px; border-bottom: 1px solid #e8edf3; vertical-align: top; font-size: .84rem; overflow-wrap: anywhere; }
+    th:nth-child(1), td:nth-child(1) { width: 7%; }
+    th:nth-child(2), td:nth-child(2) { width: 13%; }
+    th:nth-child(3), td:nth-child(3) { width: 11%; }
+    th:nth-child(4), td:nth-child(4) { width: 14%; }
+    th:nth-child(5), td:nth-child(5) { width: 32%; }
+    th:nth-child(6), td:nth-child(6) { width: 23%; }
+    td:nth-child(6) a { display: block; font-size: .74rem; font-weight: 500; overflow-wrap: anywhere; word-break: break-word; }
+    th { background: #f0f3f8; color: #344563; font-size: .8rem; }
     tbody tr:last-child td { border-bottom: 0; }
     a { color: #1457a6; font-weight: 600; }
     .empty { text-align: center; color: #66758a; padding: 30px 16px; }
@@ -63,7 +70,7 @@
       count.textContent = `${filtered.length} ${filtered.length === 1 ? 'unidade' : 'unidades'}`;
       rows.innerHTML = filtered.length ? filtered.map(item => {
         const url = /^https:\/\//i.test(item.link ?? '') ? item.link : '';
-        return `<tr><td>${escapeHtml(item.sigla || '—')}</td><td>${escapeHtml(item.nome || '—')}</td><td>${escapeHtml(item.cnpj || '—')}</td><td>${escapeHtml(item.cidadeEstado)}</td><td>${escapeHtml(item.endereco || '—')}</td><td>${url ? `<a href="${escapeHtml(url)}" target="_blank" rel="noopener noreferrer">Abrir link</a>` : '—'}</td></tr>`;
+        return `<tr><td>${escapeHtml(item.sigla || '—')}</td><td>${escapeHtml(item.nome || '—')}</td><td>${escapeHtml(item.cnpj || '—')}</td><td>${escapeHtml(item.cidadeEstado)}</td><td>${escapeHtml(item.endereco || '—')}</td><td>${url ? `<a href="${escapeHtml(url)}" target="_blank" rel="noopener noreferrer">${escapeHtml(url)}</a>` : '—'}</td></tr>`;
       }).join('') : `<tr><td class="empty" colspan="6">${term ? 'Nenhum resultado encontrado.' : 'Os endereços serão exibidos aqui após a inclusão da base autorizada.'}</td></tr>`;
     }
     search.addEventListener('input', render);
